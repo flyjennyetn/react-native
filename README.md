@@ -6,6 +6,6 @@
         react-native\android\app\build\outputs\apk
 
 
-3. 框架搭建有
+2. 框架搭建有
         react ，react-native 0.38.1 ，redux ，react-redux ，redux-actions ，redux-saga
 
