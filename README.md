@@ -7,8 +7,6 @@
  react 开发框架，集成[redux]( http://cn.redux.js.org/index.html)，[react-router](http://leonshi.com/redux-saga-in-chinese/index.html)，[redux-saga](http://www.uprogrammer.cn/react-router-cn/  )，[CSS Modules ](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)，
  [redux-actions](https://www.npmjs.com/package/redux-actions) ，使用webpack构建。
 
- 只有android版本 功能有，微信分享，消息推送，照相摄像，扫一扫，网络状态，左侧划出，底部菜单，头像上传，列表，手势密码锁，后台唤醒锁屏，webview视频 等。。。
-
 ##安装
 * npm install
 
@@ -165,67 +163,9 @@ export default App;
 ```
 这个页面主要注册了一个的原生的导航器 Navigator 
 
-#### ```app/js/containers/Splash/index.js```  
- 
-```js
-import React, { Component } from 'react';
-import {Dimensions,Image,InteractionManager,View} from 'react-native';
-import {Storage} from '../../tools/common';
-import Main from '../Main';
-import Login from '../Login/';
-
-var {height, width} = Dimensions.get('window');
-
-class Search extends Component {
-	 constructor(props) {
-        super(props);
-    }
-    //插入真实DOM之后
-    componentDidMount() {
-        const {navigator} = this.props;
-        this.timer = setTimeout(() => {
-            //Interactionmanager可以将一些耗时较长的工作安排到所有互动或动画完成之后再进行。这样可以保证JavaScript动画的流畅运行。
-            InteractionManager.runAfterInteractions(() => {
-                Storage.get('userData').then(ret => {
-                    if(ret){
-                        //跳转到新的场景，并且重置整个路由栈
-                        navigator.resetTo({
-                            component: Main,
-                            name: 'Main'
-                        });
-                    }else{
-                        navigator.resetTo({
-                            component: Login,
-                            name: 'Login'
-                        });
-                    }
-                })
-            });
-        }, 1);
-    }
-
-    // 移除真实DOM 之前
-    componentWillUnmount() {
-        this.timer && clearTimeout(this.timer);
-    }
-
-    render() {
-        return (
-            <View style={{flex: 1}}>
-                <Image
-                    style={{flex: 1, width: width, height: height}}
-                    source={require('../../../images/ic_welcome.jpg')}
-                />
-            </View>
-        );
-    }
-}
-
-export default Search
-```
-app 过渡页面 判断是否登录 没有登录跳登录页面，有登录去主页
-
-
+#### ```src/sagas/index.js```   
+#### ```src/reducers/index.js``` 
+...除视图外，页面雷同于web端react
 
 #### ```app/js/containers/Main.js```  
  
@@ -278,51 +218,51 @@ class Main extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        	userData:{},
+            userData:{},
             currentAppState: AppState.currentState,
-  	      	selectedTab:'courses',
-		    drawerItems:[
-	            ['账户修改',changeMsg,1],
-	            ['修改密码',lock,2],
-	            ['绑定手机',mobile,3],
-	            ['访问wap版',discoverFill,4],
-	            ['网络状态',wifi,5],
-	            ['拍照摄影',camera,6],
-	            ['扫一扫',scan,7],
-	            ['退出',back,0]
-		    ],
-		    gradeGather:[
-		    	'小学一年级',
-		    	'小学二年级',
-		    	'小学三年级',
-		    	'小学四年级',
-		    	'小学五年级',
-		    	'小学六年级',
-		    	'初中一年级',
-		    	'初中二年级',
-		    	'初中三年级',
-		    	'高中一年级',
-		    	'高中二年级',
-		    	'高中三年级'
-		    ]
-	    };
+            selectedTab:'courses',
+            drawerItems:[
+                ['账户修改',changeMsg,1],
+                ['修改密码',lock,2],
+                ['绑定手机',mobile,3],
+                ['访问wap版',discoverFill,4],
+                ['网络状态',wifi,5],
+                ['拍照摄影',camera,6],
+                ['扫一扫',scan,7],
+                ['退出',back,0]
+            ],
+            gradeGather:[
+                '小学一年级',
+                '小学二年级',
+                '小学三年级',
+                '小学四年级',
+                '小学五年级',
+                '小学六年级',
+                '初中一年级',
+                '初中二年级',
+                '初中三年级',
+                '高中一年级',
+                '高中二年级',
+                '高中三年级'
+            ]
+        };
     }
 
     componentWillMount(){
-    	Storage.get('userData').then(ret=>{
-    		this.state.userData = ret;
-    		this.props.dispatch({
+        Storage.get('userData').then(ret=>{
+            this.state.userData = ret;
+            this.props.dispatch({
                 type:'user/query/pci',
                 token:ret.token
             })
-    	});
+        });
     }
 
     componentDidMount() {
         AppState.addEventListener('change', this._handleAppStateChange);
 
         JPushModule.addReceiveNotificationListener((message) => {
-        	//这是默认的通知消息   
+            //这是默认的通知消息   
             console.log("默认=",message);  
         })
 
@@ -333,8 +273,8 @@ class Main extends Component {
 
         //点击通知进入应用的主页，相当于跳转到制定的页面  
         JPushModule.addReceiveOpenNotificationListener((message) => {  
-        	console.log(message);
-        	var data = eval('(' + message.extras + ')');  
+            console.log(message);
+            var data = eval('(' + message.extras + ')');  
             this.props.navigator.replace({
                 name: "Activity",
                 component:Activity,
@@ -346,7 +286,7 @@ class Main extends Component {
 
     }
     componentWillUnmount() {
-      	AppState.removeEventListener('change', this._handleAppStateChange);
+        AppState.removeEventListener('change', this._handleAppStateChange);
         JPushModule.removeReceiveCustomMsgListener();
         JPushModule.removeReceiveNotificationListener();
     }
@@ -355,160 +295,160 @@ class Main extends Component {
         this.setState({currentAppState:currentAppState});
         if(currentAppState == 'active'){
             this.props.navigator.push({
-	          component: GesturePassword,
-	          name: 'GesturePassword',
-	          sceneConfig: Navigator.SceneConfigs.FadeAndroid,
-	        });
+              component: GesturePassword,
+              name: 'GesturePassword',
+              sceneConfig: Navigator.SceneConfigs.FadeAndroid,
+            });
         }
     }
 
-	onPressDrawerItem(index) {
-	    const { navigator } = this.props;
-	    this.drawer.closeDrawer();
-	    switch (index) {
-	      case 1:
-	        navigator.push({
-	          component: UserAccount,
-	          name: 'UserAccount'
-	        });
-	        break;
-	      case 2:
-	        navigator.push({
-	          component: UserPassword,
-	          name: 'UserPassword'
-	        });
-	        break;	      
-	      case 3:
-	        navigator.push({
-	          component: UserMoile,
-	          name: 'UserMoile'
-	        });
-	        break;		      
-	      case 4:
-	        navigator.push({
-	          component: WebViews,
-	          name: 'WebViews'
-	        });
-	        break;	 	      
-	      case 5:
-	        navigator.push({
-	          component: OtherNetInfo,
-	          name: 'OtherNetInfo'
-	        });
-	        break;	      
-	      case 6:
-	        navigator.push({
-	          component: OtherCamera,
-	          name: 'OtherCamera'
-	        });
-	        break;	      
-	      case 7:
-	        navigator.push({
-	          component: OtherQrcode,
-	          name: 'OtherQrcode'
-	        });
-	        break;		      
-	      default:
-	      	Storage.delete('userData');
+    onPressDrawerItem(index) {
+        const { navigator } = this.props;
+        this.drawer.closeDrawer();
+        switch (index) {
+          case 1:
+            navigator.push({
+              component: UserAccount,
+              name: 'UserAccount'
+            });
+            break;
+          case 2:
+            navigator.push({
+              component: UserPassword,
+              name: 'UserPassword'
+            });
+            break;        
+          case 3:
+            navigator.push({
+              component: UserMoile,
+              name: 'UserMoile'
+            });
+            break;            
+          case 4:
+            navigator.push({
+              component: WebViews,
+              name: 'WebViews'
+            });
+            break;            
+          case 5:
+            navigator.push({
+              component: OtherNetInfo,
+              name: 'OtherNetInfo'
+            });
+            break;        
+          case 6:
+            navigator.push({
+              component: OtherCamera,
+              name: 'OtherCamera'
+            });
+            break;        
+          case 7:
+            navigator.push({
+              component: OtherQrcode,
+              name: 'OtherQrcode'
+            });
+            break;            
+          default:
+            Storage.delete('userData');
             navigator.resetTo({
                 component: Login,
                 name: 'Login'
             });
-	        break;
-	    }
-	}
+            break;
+        }
+    }
 
-	userPic(){
-		this.drawer.closeDrawer();
-		this.setState({selectedTab:'UserInfo'})
-	}
+    userPic(){
+        this.drawer.closeDrawer();
+        this.setState({selectedTab:'UserInfo'})
+    }
 
     drawerView = ()=>{
-    	const {patch} = this.props.user.userInfo;
-    	return(
-		    <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
-		        <View style={styles.drawerTitleContent} >
-		        	<TouchableOpacity 
-		            	onPress={()=>this.userPic()}>
-                    	<Image style={styles.userImg} source={{uri:IMGADDRESS+patch}}/>
+        const {patch} = this.props.user.userInfo;
+        return(
+            <View style={[styles.container, { backgroundColor: '#fcfcfc' }]}>
+                <View style={styles.drawerTitleContent} >
+                    <TouchableOpacity 
+                        onPress={()=>this.userPic()}>
+                        <Image style={styles.userImg} source={{uri:IMGADDRESS+patch}}/>
                     </TouchableOpacity>
                     <View>
-			          <Text style={styles.drawerTitle}>
-			            {this.state.userData.name}
-			          </Text>
-			          <Text style={styles.drawerTitle}>
-			            {this.state.gradeGather[this.state.userData.grade-1]}
-			          </Text>
-			        </View>  
-		        </View>
-	            {
-	            	this.state.drawerItems.map((el,i)=>
-			            <TouchableOpacity 
-			            	key={i}
-			            	style={styles.drawerContent}
-			            	onPress={() => this.onPressDrawerItem(el[2])}>
-				                <Image style={styles.drawerIcon} source={el[1]} />
-				                <Text style={styles.drawerText}>{el[0]}</Text>
-			            </TouchableOpacity>
-	            	)
-	            }
-	        </View>
-    	)
+                      <Text style={styles.drawerTitle}>
+                        {this.state.userData.name}
+                      </Text>
+                      <Text style={styles.drawerTitle}>
+                        {this.state.gradeGather[this.state.userData.grade-1]}
+                      </Text>
+                    </View>  
+                </View>
+                {
+                    this.state.drawerItems.map((el,i)=>
+                        <TouchableOpacity 
+                            key={i}
+                            style={styles.drawerContent}
+                            onPress={() => this.onPressDrawerItem(el[2])}>
+                                <Image style={styles.drawerIcon} source={el[1]} />
+                                <Text style={styles.drawerText}>{el[0]}</Text>
+                        </TouchableOpacity>
+                    )
+                }
+            </View>
+        )
 
     }
     
     render() {
         return (
-        	<DrawerLayout
-		        ref={(drawer) => { return this.drawer = drawer  }}
-		    	drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
-		        drawerWidth={Dimensions.get('window').width / 5 * 3}
-		        renderNavigationView={this.drawerView}
-	        >
-	          	<TabNavigator>
-					<TabNavigator.Item  
-					  	title="安全"   
-					    selected={this.state.selectedTab === 'courses'}   
-					    selectedTitleStyle={styles.selectedTextStyle}
-					    titleStyle={styles.textStyle}
-					    renderIcon={() => <Image source={require("../../images/unsecurity.png")} style={styles.iconStyle}/>} 
-					    renderSelectedIcon={() => <Image source={require("../../images/security.png")} style={styles.iconStyle}/>}  
-					    onPress={() => this.setState({ selectedTab: 'courses' })}> 
-					    <Courses drawer={this.drawer} {...this.props}/>
-					</TabNavigator.Item>
-					<TabNavigator.Item
-					  	title="专题"
-					    selected={this.state.selectedTab === 'subject'}
-					    selectedTitleStyle={styles.selectedTextStyle}
-					    titleStyle={styles.textStyle}
-					    renderIcon={() => <Image source={require("../../images/unproject.png")} style={styles.iconStyle}/>}
-					    renderSelectedIcon={() => <Image source={require("../../images/project.png")} style={styles.iconStyle}/>}
-					    onPress={() => this.setState({ selectedTab: 'subject' })}>
-					    <Subject drawer={this.drawer} {...this.props}/>
-					</TabNavigator.Item>
-					<TabNavigator.Item
-					  	title="我的"
-					    selected={this.state.selectedTab === 'UserInfo'}
-					    selectedTitleStyle={styles.selectedTextStyle}
-					    titleStyle={styles.textStyle}
-					    renderIcon={() => <Image source={require("../../images/mine.png")} style={styles.iconStyle}/>}
-					    renderSelectedIcon={() => <Image source={require("../../images/mined.png")} style={styles.iconStyle}/>}
-					    onPress={() => this.setState({ selectedTab: 'UserInfo' })}>
-					    <UserInfo drawer={this.drawer} {...this.props}/>
-					</TabNavigator.Item>
-					<TabNavigator.Item
-					//默认跳转课程页
-					  	title="关于"
-					    selected={this.state.selectedTab === 'About'}
-					    selectedTitleStyle={styles.selectedTextStyle}
-					    titleStyle={styles.textStyle}
-					    renderIcon={() => <Image source={require("../../images/prompts.png")} style={styles.iconStyle}/>}
-					    renderSelectedIcon={() => <Image source={require("../../images/prompt.png")} style={styles.iconStyle}/>}
-					    onPress={() => this.setState({ selectedTab: 'About' })}>
-					    <About drawer={this.drawer} {...this.props}/>
-					</TabNavigator.Item>
-				</TabNavigator>
-			</DrawerLayout>
+            <DrawerLayout
+                ref={(drawer) => { return this.drawer = drawer  }}
+                drawerPosition={Platform.OS === 'android' ? DrawerLayoutAndroid.positions.Left : 'left'}
+                drawerWidth={Dimensions.get('window').width / 5 * 3}
+                renderNavigationView={this.drawerView}
+            >
+                <TabNavigator>
+                    <TabNavigator.Item  
+                        title="安全"   
+                        selected={this.state.selectedTab === 'courses'}   
+                        selectedTitleStyle={styles.selectedTextStyle}
+                        titleStyle={styles.textStyle}
+                        renderIcon={() => <Image source={require("../../images/unsecurity.png")} style={styles.iconStyle}/>} 
+                        renderSelectedIcon={() => <Image source={require("../../images/security.png")} style={styles.iconStyle}/>}  
+                        onPress={() => this.setState({ selectedTab: 'courses' })}> 
+                        <Courses drawer={this.drawer} {...this.props}/>
+                    </TabNavigator.Item>
+                    <TabNavigator.Item
+                        title="专题"
+                        selected={this.state.selectedTab === 'subject'}
+                        selectedTitleStyle={styles.selectedTextStyle}
+                        titleStyle={styles.textStyle}
+                        renderIcon={() => <Image source={require("../../images/unproject.png")} style={styles.iconStyle}/>}
+                        renderSelectedIcon={() => <Image source={require("../../images/project.png")} style={styles.iconStyle}/>}
+                        onPress={() => this.setState({ selectedTab: 'subject' })}>
+                        <Subject drawer={this.drawer} {...this.props}/>
+                    </TabNavigator.Item>
+                    <TabNavigator.Item
+                        title="我的"
+                        selected={this.state.selectedTab === 'UserInfo'}
+                        selectedTitleStyle={styles.selectedTextStyle}
+                        titleStyle={styles.textStyle}
+                        renderIcon={() => <Image source={require("../../images/mine.png")} style={styles.iconStyle}/>}
+                        renderSelectedIcon={() => <Image source={require("../../images/mined.png")} style={styles.iconStyle}/>}
+                        onPress={() => this.setState({ selectedTab: 'UserInfo' })}>
+                        <UserInfo drawer={this.drawer} {...this.props}/>
+                    </TabNavigator.Item>
+                    <TabNavigator.Item
+                    //默认跳转课程页
+                        title="关于"
+                        selected={this.state.selectedTab === 'About'}
+                        selectedTitleStyle={styles.selectedTextStyle}
+                        titleStyle={styles.textStyle}
+                        renderIcon={() => <Image source={require("../../images/prompts.png")} style={styles.iconStyle}/>}
+                        renderSelectedIcon={() => <Image source={require("../../images/prompt.png")} style={styles.iconStyle}/>}
+                        onPress={() => this.setState({ selectedTab: 'About' })}>
+                        <About drawer={this.drawer} {...this.props}/>
+                    </TabNavigator.Item>
+                </TabNavigator>
+            </DrawerLayout>
         );
     }
 }
@@ -526,12 +466,12 @@ const styles=StyleSheet.create({
    selectedTextStyle:{
        color:'#33cc93',
    },
-	userImg:{ 
-	    width:70,
-	    height:70,
-	    borderRadius:70,
-	    marginRight:8,
-	},
+    userImg:{ 
+        width:70,
+        height:70,
+        borderRadius:70,
+        marginRight:8,
+    },
    container: {
     flex: 1,
     flexDirection: 'column',
@@ -547,7 +487,7 @@ const styles=StyleSheet.create({
   drawerTitleContent: {
     height: 120,
     flexDirection:"row",
-	justifyContent:"center",
+    justifyContent:"center",
     alignItems:"center",
     padding: 20,
     backgroundColor: '#66cc66'
@@ -581,7 +521,196 @@ export default connect(mapStateToProps)(Main)
 ```
 
 这里使用了TabNavigator 底部菜单插件 ，和DrawerLayout 抽屉效果左侧划出 ，引入了所有需要跳转的页面。``` selected={this.state.selectedTab === 'courses'}```的设置为默认跳转courses页面。
-详细注解请看[web端react](https://github.com/flyjennyetn/react)。
+
+
+#### ```src/containers/Courses/index.js```   
+```js
+import React, {Component} from 'react';
+import {View,Text,Image,InteractionManager,BackAndroid,Modal,StyleSheet,Dimensions,TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
+
+// 扫一扫
+import OtherQrcode from '../Other/Qrcode';
+
+import WebVideo from '../../components/WebVideo'
+
+import Toolbar from '../../components/Toolbar'
+import CoursesTab from '../../components/CoursesTab'
+import CouresesList from '../../components/CouresesList'
+import Loading from '../../components/Loading'
+import LoadingView from '../../components/LoadingView'
+
+import {Storage,isNotNullObj,naviGoBack} from '../../tools/common';
+
+const categoryPress = require('../../../images/ic_tab_category.png');
+const scan = require('../../../images/scan-b.png');
+const { height, width } = Dimensions.get('window');
+
+const toolbarActions = [
+  { title: '扫一扫', icon: scan, show: 'always' }
+];
+
+class Courses extends Component {
+    state = {
+        userData : {},
+        modalVisible:false,
+    }
+    componentWillMount(){
+        Storage.get('userData').then(ret=>{
+            this.setState({userData:ret});
+            this.props.dispatch({
+                type:'courses/query',
+                token:ret.token
+            })
+        });
+    }
+
+    onIconClicked = ()=> {
+        this.props.drawer.openDrawer();
+    }   
+
+    componentDidMount() {
+        BackAndroid.addEventListener('hardwareBackPress', this.goBack);
+    }
+    componentWillUnmount() {
+        BackAndroid.removeEventListener('hardwareBackPress', this.goBack);
+    }
+
+    goBack = ()=> {
+
+     if (this.state.modalVisible) {
+        this.setState({
+          modalVisible: false
+        });
+        return true;
+      } 
+      return naviGoBack(this.props.navigator);
+    }
+
+    onClose = ()=> {
+        this.setState({visible:false});
+    }
+
+    setVideoId = ()=>{
+        this.setState({modalVisible:false});
+        this.props.dispatch({
+            type:'courses/set/videoId',
+            videoId:null
+        })
+    }
+
+    getVideoId = (lessonId)=>{
+        const {dispatch} = this.props;
+        const {token} = this.state.userData;
+
+        dispatch({
+            type:'courses/get/videoId',
+            token:token,
+            lessonId:lessonId
+        });    
+        this.setState({modalVisible:true})  
+    }
+
+    learningLesson = (lessonId)=>{
+        const {dispatch,navigator} = this.props;
+        const {token,grade} = this.state.userData;
+
+        dispatch({
+            type:'courses/learning',
+            token,
+            grade,
+            lessonId,
+            navigator
+        });  
+    }
+
+    onActionSelected = ()=>{
+        this.props.navigator.push({
+          component: OtherQrcode,
+          name: 'OtherQrcode'
+        });
+    }
+
+    render() {
+        const {courses,dispatch,navigator} = this.props;
+        return (
+            <View>
+               <Toolbar
+                    navigator = {navigator}
+                    onIconClicked={this.onIconClicked}
+                    title = "安全"
+                    leftIcon = {categoryPress}
+                    actions={toolbarActions}
+                    onActionSelected={this.onActionSelected}
+                />
+                <CoursesTab dispatch={dispatch} coursesState={courses.coursesState} />
+                {isNotNullObj(courses.items) ?
+                    <CouresesList 
+                        courses={courses}
+                        getVideoId={this.getVideoId}
+                        learningLesson={this.learningLesson}
+                    />
+                    :
+                    <LoadingView />
+                }
+                <Modal
+                  animationType={"fade"}
+                  transparent={true}
+                  visible={this.state.modalVisible}
+                  onRequestClose={this.setVideoId}
+                  >
+
+                    {courses.videoId != null &&
+                        <View style={CoursesStyles.spinner}>
+                           <TouchableOpacity 
+                                style={CoursesStyles.backOpacity}
+                                onPress={this.setVideoId} >
+                                <Image style={CoursesStyles.back} source={require('../../../images/close.png')}/>
+                           </TouchableOpacity>
+                           <WebVideo videoId={courses.videoId}/>
+                        </View>
+                    }
+
+                </Modal>
+                <Loading visible={courses.visible} />
+            </View>
+        )
+    }
+}
+
+
+const CoursesStyles = StyleSheet.create({
+    spinner: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.65)'
+    },
+    backOpacity:{
+        width:width,
+        backgroundColor: '#fff',
+        height:25,
+        flexDirection:"row-reverse",
+    },
+    back:{
+        width:25,
+        height:25,
+        resizeMode:'stretch',
+        marginRight:12,
+    }
+});
+
+
+function mapStateToProps({courses}) {
+    return {courses}
+}
+export default connect(mapStateToProps)(Courses)
+```
+
+和react不同之处在  html标签不一样  ```react-native```使用请看官网组件库
+
+开发流程请先了解[web端react](https://github.com/flyjennyetn/react)。
 
 
 ##links
