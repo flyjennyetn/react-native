@@ -2,6 +2,7 @@
   "name": "qsndyr",
   "version": "0.0.1",
   "private": true,
+  "author": "flyjennyetn",
   "scripts": {
     "configureJPush": "node node_modules/jpush-react-native/JPushConfiguration.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
