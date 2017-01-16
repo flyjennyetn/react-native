@@ -8,8 +8,8 @@ import * as WeChat from 'react-native-wechat';
 
 import Toolbar from '../../components/Toolbar';
 import LoadingView from '../../components/LoadingView';
-import {Storage,naviGoBack,toastShort} from '../../tools/common';
-import {IMGADDRESS} from '../../tools/config';
+import {Storage,naviGoBack,toastShort} from '../../utils/common';
+import {IMGADDRESS} from '../../utils/config';
 
 const shareIconWechat = require('../../../images/share_icon_wechat.png');
 const shareIconMoments = require('../../../images/share_icon_moments.png');

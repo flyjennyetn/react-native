@@ -6,7 +6,7 @@ import {AppRegistry,BackAndroid} from 'react-native';
 
 import PasswordGesture from 'react-native-gesture-password';
 
-import {naviGoBack} from '../../tools/common';
+import {naviGoBack} from '../../utils/common';
 
 let Password1 = '';
 class GesturePassword extends Component {

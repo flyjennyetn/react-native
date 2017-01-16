@@ -18,6 +18,8 @@
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-drawer-layout": "^1.1.0",
     "react-native-gesture-password": "^0.2.0",
+    "react-native-navbar": "^1.5.4",
+    "react-native-router-flux": "^3.37.0",
     "react-native-image-picker": "^0.24.0",
     "react-native-tab-navigator": "^0.3.3",
     "react-native-wechat": "^1.7.0",

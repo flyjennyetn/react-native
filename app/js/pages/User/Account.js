@@ -6,7 +6,7 @@ import {View,Text,StyleSheet,Dimensions,TextInput,BackAndroid} from 'react-nativ
 import {connect} from 'react-redux'
 import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button';
-import {Storage,toastShort,naviGoBack} from '../../tools/common';
+import {Storage,toastShort,naviGoBack} from '../../utils/common';
 
 class UserAccount extends Component {
     state = {

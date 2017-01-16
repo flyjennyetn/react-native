@@ -12,7 +12,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-import { naviGoBack } from '../tools/common';
+import { naviGoBack } from '../utils/common';
 
 const leftIcons = require('../../images/ic_back.png');
 

@@ -34,8 +34,8 @@ import WebViews from './Web/WebViews';
 
 import Activity from './Activity/';
 
-import {Storage} from '../tools/common';
-import {IMGADDRESS} from '../tools/config';
+import {Storage} from '../utils/common';
+import {IMGADDRESS} from '../utils/config';
 
 //其他例子
 // 网络

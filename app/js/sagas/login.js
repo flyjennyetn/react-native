@@ -11,9 +11,9 @@ import {
 	fork,
 	select
 } from 'redux-saga/effects';
-import {xFetch} from '../tools/xFetch';
-import {Storage,naviGoBack,toastShort} from '../tools/common';
-import Main from '../containers/Main';
+import {xFetch} from '../utils/xFetch';
+import {Storage,naviGoBack,toastShort} from '../utils/common';
+import Main from '../pages/Main';
 
 function* loginQuery({
 	userData,navigator

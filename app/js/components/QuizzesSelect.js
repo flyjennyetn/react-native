@@ -3,7 +3,7 @@
  */
 import React, {Component, PropTypes} from 'react'
 import {View,Text,Image,StyleSheet,Dimensions,TouchableOpacity,ListView} from 'react-native';
-import {IMGADDRESS} from '../tools/config';
+import {IMGADDRESS} from '../utils/config';
 
 const selectImg = require('../../images/question_selectImg.png');
 

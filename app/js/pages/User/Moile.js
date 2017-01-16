@@ -8,7 +8,7 @@ import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 
-import {Storage,toastShort,naviGoBack} from '../../tools/common';
+import {Storage,toastShort,naviGoBack} from '../../utils/common';
 
 class UserMoile extends Component {
     state = {

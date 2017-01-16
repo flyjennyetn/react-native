@@ -5,7 +5,7 @@ import React, {Component, PropTypes} from 'react'
 import {View,Text,Image,StyleSheet,Dimensions,TextInput,BackAndroid} from 'react-native';
 import {connect} from 'react-redux'
 import Toolbar from '../../components/Toolbar'
-import {toastShort,naviGoBack} from '../../tools/common';
+import {toastShort,naviGoBack} from '../../utils/common';
 
 const trueImg = require('../../../images/check.png');
 const toolbarActions = [

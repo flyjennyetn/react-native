@@ -4,8 +4,8 @@
 import React, {Component, PropTypes} from 'react'
 import {View,Text,Image,StyleSheet,Dimensions,TouchableOpacity,ListView} from 'react-native';
 import {connect} from 'react-redux'
-import {isNotNullObj,Storage} from '../tools/common';
-import {IMGADDRESS} from '../tools/config';
+import {isNotNullObj,Storage} from '../utils/common';
+import {IMGADDRESS} from '../utils/config';
 
 const tipLabel = require('../../images/tipLabel.png');
 

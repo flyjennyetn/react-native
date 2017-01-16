@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import UserRecovered from './Recovered';
 import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button';
-import {Storage,toastShort,naviGoBack} from '../../tools/common';
+import {Storage,toastShort,naviGoBack} from '../../utils/common';
 
 const inputLine = require('../../../images/pwdBack_line.png');
 

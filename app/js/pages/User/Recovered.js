@@ -6,7 +6,7 @@ import {View,Text,Image,StyleSheet,Dimensions,ScrollView,TextInput,Picker,BackAn
 import {connect} from 'react-redux'
 import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button';
-import {Storage,toastShort,naviGoBack} from '../../tools/common';
+import {Storage,toastShort,naviGoBack} from '../../utils/common';
 
 const inputLine = require('../../../images/pwdBack_line.png');
 

@@ -8,7 +8,7 @@ import {
     InteractionManager,
     View
 } from 'react-native';
-import {Storage} from '../../tools/common';
+import {Storage} from '../../utils/common';
 import Main from '../Main';
 import Login from '../Login/';
 

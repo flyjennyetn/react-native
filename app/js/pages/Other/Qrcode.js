@@ -10,7 +10,7 @@ import {
   } from 'react-native';
 
 import BarcodeScanner from 'react-native-barcodescanner';
-import {toastShort} from '../../tools/common';
+import {toastShort} from '../../utils/common';
 
 
 class Qrcode extends Component {

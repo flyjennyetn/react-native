@@ -12,8 +12,8 @@ import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button';
 import Loading from '../../components/Loading'
 import LoadingView from '../../components/LoadingView'
-import {IPLOCATION,IMGADDRESS} from '../../tools/config';
-import {Storage,isNotNullObj,toastShort} from '../../tools/common';
+import {IPLOCATION,IMGADDRESS} from '../../utils/config';
+import {Storage,isNotNullObj,toastShort} from '../../utils/common';
 const categoryPress = require('../../../images/ic_tab_category.png');
 
 

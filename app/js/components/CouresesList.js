@@ -7,7 +7,7 @@ import {connect} from 'react-redux'
 import moment from 'moment'
 import Button from './Button';
 
-import {IMGADDRESS} from '../tools/config';
+import {IMGADDRESS} from '../utils/config';
 
 const tipLabel = require('../../images/tipLabel.png');
 const time = require('../../images/time.png');

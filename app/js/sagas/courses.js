@@ -13,9 +13,9 @@ import {
 	select
 } from 'redux-saga/effects';
 
-import {xFetch} from '../tools/xFetch';
-import {toastShort} from '../tools/common';
-import Quizzes from '../containers/Courses/Quizzes'
+import {xFetch} from '../utils/xFetch';
+import {toastShort} from '../utils/common';
+import Quizzes from '../pages/Courses/Quizzes'
 
 function* coursesQuery({
 	token

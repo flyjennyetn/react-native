@@ -5,7 +5,7 @@ import React, {Component} from 'react'
 import {View,StyleSheet,WebView,Dimensions,BackAndroid} from 'react-native';
 import {connect} from 'react-redux'
 import Toolbar from '../../components/Toolbar'
-import {naviGoBack} from '../../tools/common';
+import {naviGoBack} from '../../utils/common';
 
 let canGoBack = false;
 

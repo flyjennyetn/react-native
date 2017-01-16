@@ -12,8 +12,8 @@ import {
 	fork,
 	select
 } from 'redux-saga/effects';
-import {xFetch} from '../tools/xFetch';
-import SubjectDetails from '../containers/Subject/Details'
+import {xFetch} from '../utils/xFetch';
+import SubjectDetails from '../pages/Subject/Details'
 
 function* subjectQuery() {
 	const items = yield call(xFetch, {

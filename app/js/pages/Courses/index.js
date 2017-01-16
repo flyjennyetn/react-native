@@ -16,7 +16,7 @@ import CouresesList from '../../components/CouresesList'
 import Loading from '../../components/Loading'
 import LoadingView from '../../components/LoadingView'
 
-import {Storage,isNotNullObj,naviGoBack} from '../../tools/common';
+import {Storage,isNotNullObj,naviGoBack} from '../../utils/common';
 
 const categoryPress = require('../../../images/ic_tab_category.png');
 const scan = require('../../../images/scan-b.png');

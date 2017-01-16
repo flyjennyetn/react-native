@@ -12,7 +12,7 @@ import {
 	fork,
 	select
 } from 'redux-saga/effects';
-import {xFetch} from '../tools/xFetch';
+import {xFetch} from '../utils/xFetch';
 function quizzesGetScoreLog({
 	isPassExam,
 	results

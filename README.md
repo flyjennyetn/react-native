@@ -22,10 +22,10 @@
     ├── images           # 图片库
     ├── js   
          ├──components   # 组件库
-         ├── containers  # 容器/页
+         ├── pages      # 容器/页
          ├── reducers   # 负责处理action的state更新。
          ├── sagas      # 负责协调那些复杂或异步的操作。
-         ├── tools      # 工具库
+         ├── utils      # 工具库
          ├── app.js     # app入口文件
     ├──index.js
 ├─ ios     
@@ -105,8 +105,8 @@ export default class MyProject extends Component {
 import React, { Component } from 'react';
 import {Navigator,View,StatusBar,Platform,BackAndroid} from 'react-native';
 import { registerApp } from 'react-native-wechat';
-import Splash from './containers/Splash/';
-import { naviGoBack } from './tools/common';
+import Splash from './pages/Splash/';
+import { naviGoBack } from './utils/common';
 
 let tempNavigator;
 let isRemoved = false;
@@ -167,7 +167,7 @@ export default App;
 #### ```src/reducers/index.js``` 
 ...除视图外，页面雷同于web端react
 
-#### ```app/js/containers/Main.js```  
+#### ```app/js/pages/Main.js```  
  
 ```js
 'use strict';
@@ -192,8 +192,8 @@ import WebViews from './Web/WebViews';
 
 import Activity from './Activity/';
 
-import {Storage} from '../tools/common';
-import {IMGADDRESS} from '../tools/config';
+import {Storage} from '../utils/common';
+import {IMGADDRESS} from '../utils/config';
 
 //其他例子
 // 网络
@@ -523,7 +523,7 @@ export default connect(mapStateToProps)(Main)
 这里使用了TabNavigator 底部菜单插件 ，和DrawerLayout 抽屉效果左侧划出 ，引入了所有需要跳转的页面。``` selected={this.state.selectedTab === 'courses'}```的设置为默认跳转courses页面。
 
 
-#### ```src/containers/Courses/index.js```   
+#### ```src/pages/Courses/index.js```   
 ```js
 import React, {Component} from 'react';
 import {View,Text,Image,InteractionManager,BackAndroid,Modal,StyleSheet,Dimensions,TouchableOpacity} from 'react-native';
@@ -540,7 +540,7 @@ import CouresesList from '../../components/CouresesList'
 import Loading from '../../components/Loading'
 import LoadingView from '../../components/LoadingView'
 
-import {Storage,isNotNullObj,naviGoBack} from '../../tools/common';
+import {Storage,isNotNullObj,naviGoBack} from '../../utils/common';
 
 const categoryPress = require('../../../images/ic_tab_category.png');
 const scan = require('../../../images/scan-b.png');
@@ -711,6 +711,62 @@ export default connect(mapStateToProps)(Courses)
 和react不同之处在  html标签不一样  ```react-native```使用请看官网组件库
 
 开发流程请先了解[web端react](https://github.com/flyjennyetn/react)。
+
+####```src/js/utils/xFetch.js``` 
+ 
+```js
+//ajax请求方法==xFetch
+export function xFetch(options) {
+    return new Promise((resolve, reject) => {
+        fetch(`${IPLOCATION + options.requestUrl}?${qs.stringify(options)}`)
+        .then((response) => {
+            if (response.ok) {
+              isOk = true;
+            } else {
+              isOk = false;
+            }
+            return response.json();
+        })
+        .then((responseData) => {
+            if(!responseData.result){
+                toastShort(responseData.msg,true);
+                return;
+            }else{
+                resolve(responseData.t);
+            }
+        })
+        .catch((error) => {
+            reject(error);
+        });
+    });
+}
+```
+原生ajax方法，公共方法的详细解释请看[web端react](https://github.com/flyjennyetn/react#src/js/utils/xFetch.js)。
+
+####```src/js/sagas/courses.js``` 
+ 
+```js
+function* coursesQuery({
+    token
+}) {
+    const coursesUp = yield call(xFetch, {
+        requestUrl: 'interface/getLessonInfoByStuNoForCenter.json',
+        token,
+        stuTerm: 1
+    });
+    const coursesDown = yield call(xFetch, {
+        requestUrl: 'interface/getLessonInfoByStuNoForCenter.json',
+        token,
+        stuTerm: 2
+    });
+    yield put({
+        type: 'courses/qurery/success',
+        coursesUp,
+        coursesDown
+    });
+}
+```
+
 
 
 ##links

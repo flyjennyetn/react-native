@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import Toolbar from '../../components/Toolbar'
 import SubjectList from '../../components/SubjectList'
 import LoadingView from '../../components/LoadingView'
-import {isNotNullObj} from '../../tools/common';
+import {isNotNullObj} from '../../utils/common';
 const categoryPress = require('../../../images/ic_tab_category.png');
 class Subject extends Component {
 

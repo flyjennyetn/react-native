@@ -9,8 +9,8 @@ import {
 // 微信分享插件
 import { registerApp } from 'react-native-wechat';
 
-import Splash from './containers/Splash/';
-import { naviGoBack } from './tools/common';
+import Splash from './pages/Splash/';
+import { naviGoBack } from './utils/common';
 
 let tempNavigator;
 let isRemoved = false;

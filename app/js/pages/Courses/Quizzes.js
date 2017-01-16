@@ -9,7 +9,7 @@ import LoadingView from '../../components/LoadingView';
 import QuizzesRadio from '../../components/QuizzesRadio'
 import QuizzesSelect from '../../components/QuizzesSelect'
 import Button from '../../components/Button'
-import {Storage,isNotNullObj,toastShort,naviGoBack} from '../../tools/common';
+import {Storage,isNotNullObj,toastShort,naviGoBack} from '../../utils/common';
 const { height, width } = Dimensions.get('window');
 
 class Quizzes extends Component {

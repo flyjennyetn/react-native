@@ -11,8 +11,8 @@ import {
 	fork,
 	select
 } from 'redux-saga/effects';
-import {xFetch,xFetchCode} from '../tools/xFetch';
-import {Storage,toastShort} from '../tools/common';
+import {xFetch,xFetchCode} from '../utils/xFetch';
+import {Storage,toastShort} from '../utils/common';
 function* userQueryPci({
 	token
 }) {
