@@ -2,10 +2,13 @@
 
 
 ##[react-native](https://github.com/flyjennyetn/react-native)
->```注意``` 使用本框架前请先学习[es6](http://es6.ruanyifeng.com/)相关知识和[react](http://www.ruanyifeng.com/blog/2015/03/react.html)基础知识，了解一遍react-native组件API。
+>```注意``` 使用本框架前请先学习[es6](http://es6.ruanyifeng.com/)相关知识和[react](http://www.ruanyifeng.com/blog/2015/03/react.html)基础知识，了解一遍[react-native](http://reactnative.cn/docs/0.40/getting-started.html)组件API。
 
- react 开发框架，集成[redux]( http://cn.redux.js.org/index.html)，[react-router](http://leonshi.com/redux-saga-in-chinese/index.html)，[redux-saga](http://www.uprogrammer.cn/react-router-cn/  )，[CSS Modules ](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)，
- [redux-actions](https://www.npmjs.com/package/redux-actions) ，使用webpack构建。
+本框架是为了解决了多平台开发（[web](https://github.com/flyjennyetn/react)，[原生](https://github.com/flyjennyetn/react-native)，[微信小程序](https://github.com/flyjennyetn/wechat-react)）使用一套标准架构，节约开发成本。组件化开发复用之高能快速搭建一个项目。加入了号称渲染速度最快的虚拟DOM，使用redux数据流控制，让项目逻辑清晰可维护。用webpack构建强力压缩代码，尽可能减小程序体积，让你在1M的限制内做更多的事。
+
+##环境搭建
+如未安装[git]( https://git-for-windows.github.io/)，[Python](https://www.python.org/downloads/release/python-2710/)，[node.js]( https://nodejs.org/en/)，请参考[环境搭建教程](http://bbs.reactnative.cn/topic/10/%E5%9C%A8windows%E4%B8%8B%E6%90%AD%E5%BB%BAreact-native-android%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83) 安装。
+
 
 ##安装
 * npm install
@@ -770,8 +773,6 @@ function* coursesQuery({
 
 
 ##links
-
-[react-native](https://github.com/flyjennyetn/react-native)
 
 [react](https://github.com/flyjennyetn/react)
 
