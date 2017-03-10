@@ -12,10 +12,9 @@ import {
 	fork,
 	select
 } from 'redux-saga/effects';
-
+import {Actions} from "react-native-router-flux";
 import {xFetch} from '../utils/xFetch';
 import {toastShort} from '../utils/common';
-import Quizzes from '../pages/Courses/Quizzes'
 
 function* coursesQuery({
 	token
@@ -55,8 +54,7 @@ function* queryVideoId({
 function* isLearning({
 	token,
 	grade,
-	lessonId,
-	navigator
+	lessonId
 }) {
 	const study = yield call(xFetch, {
 		requestUrl: 'interface/queryIfExam.json',
@@ -65,13 +63,8 @@ function* isLearning({
 	});
 
 	if (study.isPassStudy == 1) {
-		navigator.push({
-            component: Quizzes,
-            name: 'Quizzes',
-            params:{
-				lessonId
-            }
-		});
+		Actions.quizzes({params:{lessonId}})
+
 	} else {
 		toastShort("请先学习课程！")
 	}

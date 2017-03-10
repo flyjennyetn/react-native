@@ -108,7 +108,7 @@ const QuizzesSelectStyles = StyleSheet.create({
     },
     answerItem:{
         width:width,
-        flex: 1,
+        flexGrow: 1,
         flexDirection:"row",
         marginBottom:10,
     },

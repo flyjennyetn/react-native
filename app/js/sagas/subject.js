@@ -12,8 +12,8 @@ import {
 	fork,
 	select
 } from 'redux-saga/effects';
+import {Actions} from "react-native-router-flux";
 import {xFetch} from '../utils/xFetch';
-import SubjectDetails from '../pages/Subject/Details'
 
 function* subjectQuery() {
 	const items = yield call(xFetch, {
@@ -34,23 +34,20 @@ function* learningThematic({
 	thematicNum,
 	stuCode,
 	thematicSname,
-	photoUrl1,
-	navigator
+	photoUrl1
 }) {
 	yield call(xFetch, {
 		requestUrl: 'interface/learningThematic.json',
 		thematicNum,
 		stuCode
 	})
-	navigator.push({
-        component: SubjectDetails,
-        name: 'SubjectDetails',
-        params:{
+	Actions.subjectDetails({
+		params:{
 			thematicSname,
 			photoUrl1,
 			thematicNum
-        }
-	});
+	    }
+	})
 }
 
 function* watchSubject() {

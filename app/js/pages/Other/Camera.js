@@ -218,10 +218,10 @@ onBarCodeRead=(e)=>{
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
   },
   preview: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   },
   topOverlay: {
     top: 0,
-    flex: 1,
+    flexGrow: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

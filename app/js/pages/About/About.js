@@ -25,11 +25,9 @@ class About extends Component {
   }   
 
   render() {
-    const { navigator } = this.props;
     return (
       <View style={styles.container}>
        <Toolbar
-            navigator = {navigator}
             onIconClicked={this.onIconClicked}
             title = "关于"
             leftIcon = {require('../../../images/ic_tab_category.png')}
@@ -81,17 +79,17 @@ class About extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     flexDirection: 'column',
   },
   content: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#fcfcfc',
     justifyContent: 'center',
     paddingBottom: 10
   },
   center: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center'
   },
   logo: {

@@ -14,11 +14,10 @@ let canGoBack = false;
 class Activity extends Component {
   
     render() {
-        const {activityNum} = this.props.route.params;
+        const {activityNum} = this.props.params;
         return (
             <View>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     title = {"活动"}
                 />
                 <WebView

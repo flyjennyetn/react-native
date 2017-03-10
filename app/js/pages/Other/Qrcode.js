@@ -9,7 +9,7 @@ import {
   Vibration
   } from 'react-native';
 
-import BarcodeScanner from 'react-native-barcodescanner';
+// import BarcodeScanner from 'react-native-barcodescanner';
 import {toastShort} from '../../utils/common';
 
 
@@ -32,14 +32,20 @@ class Qrcode extends Component {
 
   render() {
     return (
-      <BarcodeScanner
-        onBarCodeRead={this.barcodeReceived}
-        style={styles.camera}
-      >
-          <View style={styles.rectangleContainer}>
-              <View style={styles.rectangle} />
-          </View>
-      </BarcodeScanner>
+      <View>
+      {/*
+
+        <BarcodeScanner
+          onBarCodeRead={this.barcodeReceived}
+          style={styles.camera}
+        >
+            <View style={styles.rectangleContainer}>
+                <View style={styles.rectangle} />
+            </View>
+        </BarcodeScanner>
+      */}
+      </View>
+     
     );
   }
 }
@@ -47,10 +53,10 @@ class Qrcode extends Component {
 
 const styles = StyleSheet.create({
     camera: {
-        flex: 1
+        flexGrow: 1
     },
     rectangleContainer: {
-        flex: 1,
+        flexGrow: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'transparent'

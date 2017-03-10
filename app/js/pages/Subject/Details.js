@@ -4,7 +4,7 @@
 import React, {Component, PropTypes} from 'react'
 import {View,Text,Image,StyleSheet,Dimensions,WebView,Modal,TouchableOpacity,BackAndroid,TouchableWithoutFeedback} from 'react-native';
 import {connect} from 'react-redux'
-import * as WeChat from 'react-native-wechat';
+//import * as WeChat from 'react-native-wechat';
 
 import Toolbar from '../../components/Toolbar';
 import LoadingView from '../../components/LoadingView';
@@ -47,12 +47,12 @@ class SubjectDetails extends Component {
         this.webview.goBack();
         return true;
       }
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     renderSpinner() {
       const { route } = this.props;
-      const {thematicSname,photoUrl1,thematicNum} = this.props.route.params;
+      const {thematicSname,photoUrl1,thematicNum} = this.props.params;
       return (
         <TouchableWithoutFeedback
           onPress={() => {
@@ -73,23 +73,7 @@ class SubjectDetails extends Component {
                 <TouchableOpacity
                   style={SubjectDetailsStyles.base}
                   onPress={() => {
-                    WeChat.isWXAppInstalled()
-                      .then((isInstalled) => {
-                        if (isInstalled) {
-                          WeChat.shareToSession({
-                            title: thematicSname,
-                            description: '分享自：青少年第一人',
-                            thumbImage: IMGADDRESS+photoUrl1,
-                            type: 'news',
-                            webpageUrl: shareAddress+thematicNum
-                          })
-                          .catch((error) => {
-                            toastShort(error.message, true);
-                          });
-                        } else {
-                          toastShort('没有安装微信软件，请您安装微信之后再试', true);
-                        }
-                      });
+                    
                   }}
                 >
                   <View style={SubjectDetailsStyles.shareContent}>
@@ -105,22 +89,7 @@ class SubjectDetails extends Component {
                 <TouchableOpacity
                   style={SubjectDetailsStyles.base}
                   onPress={() => {
-                    WeChat.isWXAppInstalled()
-                      .then((isInstalled) => {
-                        if (isInstalled) {
-                          WeChat.shareToTimeline({
-                            title: thematicSname,
-                            thumbImage: IMGADDRESS+photoUrl1,
-                            type: 'news',
-                            webpageUrl: shareAddress+thematicNum
-                          })
-                          .catch((error) => {
-                            toastShort(error.message, true);
-                          });
-                        } else {
-                          toastShort('没有安装微信软件，请您安装微信之后再试', true);
-                        }
-                      });
+                    
                   }}
                 >
                   <View style={SubjectDetailsStyles.shareContent}>
@@ -148,11 +117,10 @@ class SubjectDetails extends Component {
     }
 
     render() {
-        const {thematicSname,thematicNum} = this.props.route.params;
+        const {thematicSname,thematicNum} = this.props.params;
         return (
-            <View>
+            <View style={{flexGrow:1}}>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     actions={toolbarActions}
                     onActionSelected={()=>{this.setState({isShareModal: true })}}
                     title = {thematicSname}
@@ -174,7 +142,7 @@ class SubjectDetails extends Component {
                   ref={(ref) => { this.webview = ref; }}
                   automaticallyAdjustContentInsets={false}
                   style={SubjectDetailsStyles.webView}
-                  source={{uri: shareAddress+thematicNum}}
+                  source={{uri: shareAddress+1}}
                   javaScriptEnabled={true}
                   domStorageEnabled={true}
                   decelerationRate="normal"
@@ -192,17 +160,17 @@ class SubjectDetails extends Component {
 const { height, width } = Dimensions.get('window');
 const SubjectDetailsStyles = StyleSheet.create({
     base: {
-      flex: 1
+      flexGrow:1
     },
     scroll:{
         height:height
     },
     webView:{
-        width:width,
-        height:height
+      // width: width,
+      // height: height
     },
     spinner: {
-      flex: 1,
+      flexGrow:1,
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
@@ -210,8 +178,8 @@ const SubjectDetailsStyles = StyleSheet.create({
     },
     spinnerContent: {
       justifyContent: 'center',
-      width: Dimensions.get('window').width * (7 / 10),
-      height: Dimensions.get('window').width * (7 / 10) * 0.68,
+      width: width * (7 / 10),
+      height: width * (7 / 10) * 0.68,
       backgroundColor: '#fcfcfc',
       padding: 20,
       borderRadius: 5

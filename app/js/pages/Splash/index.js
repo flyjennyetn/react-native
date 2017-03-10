@@ -9,8 +9,7 @@ import {
     View
 } from 'react-native';
 import {Storage} from '../../utils/common';
-import Main from '../Main';
-import Login from '../Login/';
+import {Actions} from "react-native-router-flux";
 
 var {height, width} = Dimensions.get('window');
 
@@ -20,22 +19,14 @@ class Search extends Component {
     }
     //插入真实DOM之后
     componentDidMount() {
-        const {navigator} = this.props;
         this.timer = setTimeout(() => {
             //Interactionmanager可以将一些耗时较长的工作安排到所有互动或动画完成之后再进行。这样可以保证JavaScript动画的流畅运行。
             InteractionManager.runAfterInteractions(() => {
                 Storage.get('userData').then(ret => {
                     if(ret){
-                        //跳转到新的场景，并且重置整个路由栈
-                        navigator.resetTo({
-                            component: Main,
-                            name: 'Main'
-                        });
+                        Actions.main();
                     }else{
-                        navigator.resetTo({
-                            component: Login,
-                            name: 'Login'
-                        });
+                        Actions.login();
                     }
                 })
             });
@@ -49,9 +40,9 @@ class Search extends Component {
 
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{flexGrow: 1}}>
                 <Image
-                    style={{flex: 1, width: width, height: height}}
+                    style={{flexGrow: 1, width: width, height: height}}
                     source={require('../../../images/ic_welcome.jpg')}
                 />
             </View>

@@ -26,14 +26,13 @@ class UserContact extends Component {
     }
 
     goBack = ()=> {
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     onActionSelected = ()=> {
         if (feedbackText === undefined || feedbackText.replace(/\s+/g, '') === '') {
           toastShort('请填写建议内容哦~');
         } else {
-          const { navigator } = this.props;
           // const feedback = AV.Object.new('Feedback');
           // feedback.set('manufacturer', DeviceInfo.getManufacturer());
           // feedback.set('system', DeviceInfo.getSystemName());
@@ -42,7 +41,6 @@ class UserContact extends Component {
           // feedback.set('appVersion', DeviceInfo.getVersion());
           // feedback.set('feedback', feedbackText);
           // feedback.save();
-          // navigator.pop();
           toastShort('您的问题已反馈，我们会及时跟进处理');
         }
     }
@@ -53,7 +51,6 @@ class UserContact extends Component {
         return (
             <View style={UserContactStyles.container}>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     actions={toolbarActions}
                     onActionSelected={this.onActionSelected}
                     title = "联系我们"
@@ -77,12 +74,12 @@ class UserContact extends Component {
 
 const UserContactStyles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     flexDirection: 'column',
     backgroundColor: '#fcfcfc',
   },
   textInput: {
-    flex: 1,
+    flexGrow: 1,
     fontSize: 18,
     padding: 15,
     textAlignVertical: 'top'

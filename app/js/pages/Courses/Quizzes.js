@@ -18,7 +18,7 @@ class Quizzes extends Component {
     }
 
     componentWillMount(){
-        const {lessonId} = this.props.route.params;
+        const {lessonId} = this.props.params;
         Storage.get('userData').then(ret=>{
             this.state.userData = ret;
             this.props.dispatch({
@@ -38,12 +38,12 @@ class Quizzes extends Component {
     }
 
     goBack = ()=> {
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     subAnswer = (lessonScore)=>{
         if(lessonScore == 'no'){
-            const {lessonId} = this.props.route.params;
+            const {lessonId} = this.props.params;
             const {exam} = this.props.quizzes;
             let results = '{"results":[';
             let key=1;
@@ -86,7 +86,6 @@ class Quizzes extends Component {
         return (
             <View style={QuizzesStyles.quizzes}>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     title = "随堂考"
                 />
                 <ScrollView

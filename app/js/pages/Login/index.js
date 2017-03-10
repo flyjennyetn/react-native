@@ -4,7 +4,7 @@
 import React,{Component} from 'react';
 import {View,Text,TextInput,Image,StyleSheet,Dimensions,ScrollView} from 'react-native';
 import {connect} from 'react-redux';
-
+import {Actions} from "react-native-router-flux";
 import UserRecovered from '../User/Recovered';
 
 import Button from '../../components/Button';
@@ -19,7 +19,7 @@ class Login extends Component {
     }
 
     userVerify = ()=>{
-        const {dispatch,navigator} = this.props;
+        const {dispatch} = this.props;
         const userData = this.state;
         if(userData.name == ""){
             alert("用户名不能为空");
@@ -31,20 +31,16 @@ class Login extends Component {
         }
         dispatch({
             type:'login/query',
-            userData,
-            navigator
+            userData
         })
     }
 
     recovered = ()=>{
-        this.props.navigator.push({
-          component: UserRecovered,
-          name: 'UserRecovered'
-        });
+        Actions.userRecovered()
     }
 
     render() {
-        const {navigator,dispatch} = this.props;
+        const {dispatch} = this.props;
         return (
             <View style={LoginStyles.login}>
 
@@ -128,13 +124,13 @@ const LoginStyles = StyleSheet.create({
     color: '#a9a9a9'
   },
   input:{
-    flex: 1,
+    flexGrow: 1,
     height: 45,
     fontSize: 18,
     color: '#000000'
   },
   content1:{
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     flexDirection:'column',
     paddingTop: 45

@@ -28,7 +28,7 @@ class UserRecovered extends Component {
     }
 
     goBack = ()=> {
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     confirm = ()=>{
@@ -62,7 +62,6 @@ class UserRecovered extends Component {
         return (
             <View style={UserRecoveredStyle.login}>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     title = "找回密码"
                 />
                  <View style={UserRecoveredStyle.content}>
@@ -183,7 +182,7 @@ const UserRecoveredStyle = StyleSheet.create({
   input:{
     width: width*0.6,
     height: 45,
-    color: '#000000',
+    // color: '#000000',
     borderColor:"#ddd",
     borderWidth:1,
   },
@@ -191,7 +190,7 @@ const UserRecoveredStyle = StyleSheet.create({
     marginTop:8,
   },
   content1:{
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     flexDirection:'column',
     paddingTop: 45

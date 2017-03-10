@@ -9,7 +9,7 @@ import {IMGADDRESS} from '../utils/config';
 
 const tipLabel = require('../../images/tipLabel.png');
 
-function SubjectList ({items,dispatch,navigator}) {
+function SubjectList ({items,dispatch,}) {
 
     const learningThematic = (thematicSname,thematicNum,photoUrl1)=> {
         Storage.get('userData').then(ret=>{
@@ -18,8 +18,7 @@ function SubjectList ({items,dispatch,navigator}) {
                 thematicNum,
                 stuCode:ret.token,
                 thematicSname,
-                photoUrl1,
-                navigator
+                photoUrl1
             });
         });
     }
@@ -70,7 +69,7 @@ const SubjectListStyles = StyleSheet.create({
         borderBottomWidth:1, 
     },
     titleMsg:{
-        flex: 1,
+        flexGrow: 1,
         flexDirection:"row",
         alignItems:"center",
         marginBottom:5,
@@ -86,7 +85,7 @@ const SubjectListStyles = StyleSheet.create({
         fontSize:20,
     },
     studyNum:{
-        flex: 1,
+        flexGrow: 1,
         flexDirection:"row",
         justifyContent:"flex-end",
         paddingBottom:2,

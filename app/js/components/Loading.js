@@ -40,7 +40,7 @@ const Loading = ({ visible, color, size, overlayColor, onRequestClose }) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: 'transparent',
     position: 'absolute',
     top: 0,

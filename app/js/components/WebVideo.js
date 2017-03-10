@@ -45,7 +45,7 @@ class WebVideo extends Component {
         return (
             <View style={{width:width,height: 275}}>
                 <WebView
-                  style={{width:width,height: 275}}
+                  style={{flexGrow: 1}}
                   source={{html: HTML}}
                   automaticallyAdjustContentInsets={false}
                   javaScriptEnabled={true}

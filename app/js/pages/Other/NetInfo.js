@@ -10,14 +10,14 @@ import {naviGoBack} from '../../utils/common';
 class OtherNetInfo extends Component {
 
 	state = {
-		connectionInfo: [],
+		connectionInfo: null,
 	}
 
 	componentDidMount() {
-	     NetInfo.addEventListener(
-		        'change',
-		        this._handleConnectionInfoChange
-		    );
+	    NetInfo.addEventListener(
+	        'change',
+	        this._handleConnectionInfoChange
+	    );
 	    NetInfo.fetch().done((connectionInfo) => { 
 	    	/*
 				NONE - 设备处于离线状态
@@ -38,22 +38,21 @@ class OtherNetInfo extends Component {
 	    });
 	}
 	componentWillUnmount() {
-		   NetInfo.removeEventListener(
+		NetInfo.removeEventListener(
 	        'change',
 	        this._handleConnectionInfoChange
 	    );
 	}
-	_handleConnectionInfoChange(connectionInfo) {
-	        this.setState({
-		      connectionInfo,
-		    });
+	_handleConnectionInfoChange = (connectionInfo) =>{
+        this.setState({
+	      connectionInfo:connectionInfo
+	    });
 	}
 
     render() {
         return (
             <View>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     title = "网络状态"
                 />
             	<Text>网络状态:{this.state.connectionInfo}</Text>

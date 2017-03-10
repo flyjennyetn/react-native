@@ -11,7 +11,6 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native';
-
 import { naviGoBack } from '../utils/common';
 
 const leftIcons = require('../../images/ic_back.png');
@@ -22,20 +21,19 @@ function Toolbar({
   titleColor,
   actions,
   onIconClicked,
-  onActionSelected,
-  navigator
+  onActionSelected
 }){
   const handleIconClicked = () => {
     if (onIconClicked) {
       onIconClicked();
-    } else if (navigator) {
-      naviGoBack(navigator);
+    } else {
+      naviGoBack();
     }
   };
 
   const renderToolbarAndroid = () => (
     <ToolbarAndroid
-      style={styles.toolbar}
+      style={styles.toolbarA}
       actions={actions}
       navIcon={leftIcon ? leftIcon : leftIcons}
       onActionSelected={onActionSelected}
@@ -46,13 +44,14 @@ function Toolbar({
   );
 
   const renderToolbarIOS = () => {
-    const action = actions[0];
+    const action = actions ? actions[0] : null;
     let showActionButton = action !== undefined;
     return (
       <View style={styles.toolbar}>
-        <TouchableOpacity onPress={this.handleIconClicked}>
+        <TouchableOpacity onPress={handleIconClicked}>
           <Image
-            source={leftIcon}
+            source={leftIcon ? leftIcon : leftIcons}
+            style={styles.leftIOS}
           />
         </TouchableOpacity>
         <Text
@@ -62,9 +61,10 @@ function Toolbar({
           {title}
         </Text>
         {action &&
-          <TouchableOpacity onPress={this.handleIconClicked}>
+          <TouchableOpacity onPress={handleIconClicked}>
             <Image
               source={action.icon}
+              style={styles.rightIOS}
             />
           </TouchableOpacity>
         }
@@ -81,26 +81,27 @@ function Toolbar({
 };
 
 const styles = StyleSheet.create({
+  toolbarA: {
+    flexDirection: 'row',
+    backgroundColor: '#66cc66',
+    height: 58
+  },  
   toolbar: {
     flexDirection: 'row',
-    alignItems: 'center',
     backgroundColor: '#66cc66',
-    height: 58,
-    marginTop: 10,
+    paddingTop:20,
+    height: 58
   },
   titleIOS: {
-    flex: 1,
+    flexGrow: 1,
     textAlign: 'center',
     color: '#fff',
-    fontSize: 20,
-    marginTop: 20
+    fontSize: 20
   },
   leftIOS: {
-    marginTop: 20,
     marginLeft: 8
   },
   rightIOS: {
-    marginTop: 20,
     marginRight: 8
   },
   rightText: {

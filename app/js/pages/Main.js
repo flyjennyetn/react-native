@@ -12,40 +12,21 @@ import {
   Platform,
   Dimensions,
   DrawerLayoutAndroid,
-  AppState,
-  Navigator
+  AppState
 } from 'react-native';
 import {connect} from 'react-redux'
 import JPushModule from 'jpush-react-native';
 import TabNavigator from 'react-native-tab-navigator';
 import DrawerLayout from 'react-native-drawer-layout';
+import {Actions} from "react-native-router-flux";
 
 import Courses from './Courses/';
 import Subject from './Subject/';
-import User from './User/';
 import UserInfo from './User/Info';
-import UserAccount from './User/Account';
-import UserMoile from './User/Moile';
-import UserPassword from './User/Password';
-
-import Login from './Login/';
 import About from './About/About';
-import WebViews from './Web/WebViews';
-
-import Activity from './Activity/';
 
 import {Storage} from '../utils/common';
 import {IMGADDRESS} from '../utils/config';
-
-//其他例子
-// 网络
-import OtherNetInfo from './Other/NetInfo';
-// 拍照摄影
-import OtherCamera from './Other/Camera';
-// 扫一扫
-import OtherQrcode from './Other/Qrcode';
-// 后台唤醒之后手势密码
-import GesturePassword from './Other/GesturePassword';
 
 
 
@@ -119,13 +100,11 @@ class Main extends Component {
         JPushModule.addReceiveOpenNotificationListener((message) => {  
         	console.log(message);
         	var data = eval('(' + message.extras + ')');  
-            this.props.navigator.replace({
-                name: "Activity",
-                component:Activity,
-                params:{
-                    activityNum:data.id
-                }
-            });  
+
+        	Actions.activity({
+                activityNum:data.id
+            });
+
         }) 
 
     }
@@ -138,66 +117,40 @@ class Main extends Component {
     _handleAppStateChange = (currentAppState)=>{
         this.setState({currentAppState:currentAppState});
         if(currentAppState == 'active'){
-            this.props.navigator.push({
+        	Actions.gesturePassword({
 	          component: GesturePassword,
-	          name: 'GesturePassword',
-	          sceneConfig: Navigator.SceneConfigs.FadeAndroid,
+	          name: 'GesturePassword'
 	        });
         }
     }
 
 	onPressDrawerItem(index) {
-	    const { navigator } = this.props;
 	    this.drawer.closeDrawer();
 	    switch (index) {
 	      case 1:
-	        navigator.push({
-	          component: UserAccount,
-	          name: 'UserAccount'
-	        });
+	      	Actions.userAccount();
 	        break;
 	      case 2:
-	        navigator.push({
-	          component: UserPassword,
-	          name: 'UserPassword'
-	        });
+	      	Actions.userPassword();
 	        break;	      
 	      case 3:
-	        navigator.push({
-	          component: UserMoile,
-	          name: 'UserMoile'
-	        });
+	        Actions.userMoile();
 	        break;		      
 	      case 4:
-	        navigator.push({
-	          component: WebViews,
-	          name: 'WebViews'
-	        });
+	      	Actions.webViews();
 	        break;	 	      
 	      case 5:
-	        navigator.push({
-	          component: OtherNetInfo,
-	          name: 'OtherNetInfo'
-	        });
+	      	Actions.otherNetInfo();
 	        break;	      
 	      case 6:
-	        navigator.push({
-	          component: OtherCamera,
-	          name: 'OtherCamera'
-	        });
+	      	Actions.otherCamera();
 	        break;	      
 	      case 7:
-	        navigator.push({
-	          component: OtherQrcode,
-	          name: 'OtherQrcode'
-	        });
+	      	Actions.otherQrcode();
 	        break;		      
 	      default:
 	      	Storage.delete('userData');
-            navigator.resetTo({
-                component: Login,
-                name: 'Login'
-            });
+	      	Actions.login();
 	        break;
 	    }
 	}
@@ -316,7 +269,7 @@ const styles=StyleSheet.create({
 	    marginRight:8,
 	},
    container: {
-    flex: 1,
+    flexGrow: 1,
     flexDirection: 'column',
     backgroundColor: '#f4f4f4'
   },

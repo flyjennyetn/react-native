@@ -2,25 +2,25 @@
   "name": "qsndyr",
   "version": "0.0.1",
   "private": true,
-  "author": "flyjennyetn",
   "scripts": {
     "configureJPush": "node node_modules/jpush-react-native/JPushConfiguration.js",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {
+    "jcore-react-native": "^1.0.0",
     "jpush-react-native": "^1.2.6",
     "moment": "^2.15.1",
     "qs": "^6.2.0",
-    "react": "15.4.1",
-    "react-native": "0.38.1",
+    "react": "15.4.2",
+    "react-native": "0.42.0",
     "react-native-barcodescanner": "^3.1.1",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-drawer-layout": "^1.1.0",
     "react-native-gesture-password": "^0.2.0",
+    "react-native-image-picker": "^0.24.0",
     "react-native-navbar": "^1.5.4",
     "react-native-router-flux": "^3.37.0",
-    "react-native-image-picker": "^0.24.0",
     "react-native-tab-navigator": "^0.3.3",
     "react-native-wechat": "^1.7.0",
     "react-redux": "^4.4.5",
@@ -28,13 +28,13 @@
     "redux-actions": "^0.10.0",
     "redux-saga": "^0.12.0"
   },
+  "devDependencies": {
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "15.4.2"
+  },
   "jest": {
     "preset": "react-native"
-  },
-  "devDependencies": {
-    "babel-jest": "17.0.2",
-    "babel-preset-react-native": "1.9.0",
-    "jest": "17.0.3",
-    "react-test-renderer": "15.4.1"
   }
 }

@@ -27,7 +27,7 @@ class UserAccount extends Component {
     }
 
     goBack = ()=> {
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     setLoginName = (loginName)=>{
@@ -69,7 +69,6 @@ class UserAccount extends Component {
         return (
             <View>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     title = "修改账户"
                 />
                 <View style={UserAccountStyles.loginAcc}>

@@ -5,7 +5,7 @@ import React, {Component} from 'react'
 import {View,Text,Image,StyleSheet,Dimensions,Platform,ScrollView,TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
-
+import {Actions} from "react-native-router-flux";
 import UserContact from './Contact';
 
 import Toolbar from '../../components/Toolbar'
@@ -65,10 +65,8 @@ class UserInfo extends Component {
     }
 
     contacts = ()=>{
-        this.props.navigator.push({
-          component: UserContact,
-          name: 'UserContact'
-        });
+        Actions.userContact()
+
     }
 
     onIconClicked = ()=> {
@@ -80,7 +78,6 @@ class UserInfo extends Component {
         return (
             <View>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     onIconClicked={this.onIconClicked}
                     title = "我的"
                     leftIcon = {categoryPress}

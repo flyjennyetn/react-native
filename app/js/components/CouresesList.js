@@ -108,12 +108,12 @@ const CouresesListStyles = StyleSheet.create({
         padding:12,
     },
     showImg:{
-        width:width,
+        width:width*0.94,
         height:210.38,
         resizeMode:'stretch'
     },
     tests:{
-        flex: 1,
+        flexGrow: 1,
         flexDirection:"row",
         justifyContent:'flex-end',
     },
@@ -130,7 +130,7 @@ const CouresesListStyles = StyleSheet.create({
         fontSize:14
     },
     botTitle:{
-        flex: 1,
+        flexGrow: 1,
         flexDirection:"row",
         justifyContent:'space-between',
         alignItems:"center",
@@ -138,7 +138,7 @@ const CouresesListStyles = StyleSheet.create({
         marginBottom:10,
     },
     botTitleLeft:{
-        flex: 2,
+        flexGrow: 2,
         flexDirection:"row",
         alignItems:"center"
     },
@@ -150,7 +150,7 @@ const CouresesListStyles = StyleSheet.create({
         marginLeft:10,
     },
     timeData:{
-        flex: 1,
+        flexGrow: 1,
         flexDirection:"row",
         justifyContent:'flex-end',
     },

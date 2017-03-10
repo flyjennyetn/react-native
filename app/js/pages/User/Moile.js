@@ -35,7 +35,7 @@ class UserMoile extends Component {
     }
 
     goBack = ()=> {
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     setMobile = (mobile)=>{
@@ -132,7 +132,6 @@ class UserMoile extends Component {
         return (
             <View>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     title = "绑定手机"
                 />
 

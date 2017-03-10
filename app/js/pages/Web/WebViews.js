@@ -28,7 +28,7 @@ class WebViews extends Component {
         this.webview.goBack();
         return true;
       }
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
     onNavigationStateChange(navState) {
       canGoBack = navState.canGoBack;
@@ -36,9 +36,8 @@ class WebViews extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{flexGrow:1}}>
         <Toolbar
-            navigator = {this.props.navigator}
             title = "青少年第一人"
         />
         <WebView

@@ -3,14 +3,12 @@
  */
 
 import { AsyncStorage,Alert, ToastAndroid, Platform} from 'react-native';
+import {Actions} from "react-native-router-flux";
 
 // 是否有打开页
-export const naviGoBack = (navigator) => {
-  if (navigator && navigator.getCurrentRoutes().length > 1) {
-    navigator.pop();
+export const naviGoBack = () => {
+    Actions.pop();
     return true;
-  }
-  return false;
 };
 
 // 缓存 封装

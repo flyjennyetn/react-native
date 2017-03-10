@@ -27,7 +27,7 @@ class GesturePassword extends Component {
 
     goBack=()=>{
       if (this.state.status == 'right') {
-        return naviGoBack(this.props.navigator);
+        return naviGoBack();
       } else {
         return true;
       }
@@ -39,7 +39,7 @@ class GesturePassword extends Component {
             this.setState({
                 status: 'right',
                 message: '密码是正确的,成功的'
-            },()=>naviGoBack(this.props.navigator));
+            },()=>naviGoBack());
         } else {
             this.setState({
                 status: 'wrong',

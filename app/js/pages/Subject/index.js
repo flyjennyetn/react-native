@@ -24,13 +24,12 @@ class Subject extends Component {
         return (
             <View>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     onIconClicked={this.onIconClicked}
                     title = "专题"
                     leftIcon = {categoryPress}
                 />
             	{isNotNullObj(items) ?
-            		<SubjectList items={items} dispatch={this.props.dispatch} navigator={this.props.navigator} />
+            		<SubjectList items={items} dispatch={this.props.dispatch}  />
 	                :
 					<LoadingView />
 				}

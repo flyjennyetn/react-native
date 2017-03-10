@@ -11,12 +11,13 @@ import {
 	fork,
 	select
 } from 'redux-saga/effects';
+import {Actions} from "react-native-router-flux";
 import {xFetch} from '../utils/xFetch';
 import {Storage,naviGoBack,toastShort} from '../utils/common';
 import Main from '../pages/Main';
 
 function* loginQuery({
-	userData,navigator
+	userData
 }) {
 	try {
 		const items = yield call(xFetch, {
@@ -24,10 +25,8 @@ function* loginQuery({
 			...userData
 		});
 		yield call(Storage.save,'userData',eval('(' + items + ')'));
-        navigator.resetTo({
-            component: Main,
-            name: 'Main'
-        });
+		Actions.main()
+
 	} catch (error) {
 	    yield toastShort(error);
 	}

@@ -4,6 +4,7 @@
 import React, {Component, PropTypes} from 'react'
 import {View,Text,Image,StyleSheet,Dimensions,ScrollView,TextInput,BackAndroid} from 'react-native';
 import {connect} from 'react-redux'
+import {Actions} from "react-native-router-flux";
 import UserRecovered from './Recovered';
 import Toolbar from '../../components/Toolbar'
 import Button from '../../components/Button';
@@ -27,7 +28,7 @@ class UserPassword extends Component {
     }
 
     goBack = ()=> {
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     confirm = ()=>{
@@ -56,16 +57,13 @@ class UserPassword extends Component {
     }
 
     recovered = ()=>{
-        this.props.navigator.push({
-          component: UserRecovered,
-          name: 'UserRecovered'
-        });
+        Actions.userRecovered()
+
     }
     render() {
         return (
             <View style={UserPasswordStyle.login}>
                 <Toolbar
-                    navigator = {this.props.navigator}
                     title = "修改密码"
                 />
                 <View style={UserPasswordStyle.content}>
@@ -167,7 +165,7 @@ const UserPasswordStyle = StyleSheet.create({
     marginTop:8,
   },
   content1:{
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     flexDirection:'column',
     paddingTop: 45

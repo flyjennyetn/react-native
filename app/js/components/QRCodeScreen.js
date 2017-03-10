@@ -92,7 +92,7 @@ var styles = StyleSheet.create({
   },
 
   rectangleContainer: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',

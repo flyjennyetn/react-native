@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import {View,Text,Image,InteractionManager,BackAndroid,Modal,StyleSheet,Dimensions,TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
-
+import {Actions} from "react-native-router-flux";
 // 扫一扫
 import OtherQrcode from '../Other/Qrcode';
 
@@ -60,7 +60,7 @@ class Courses extends Component {
         });
         return true;
       } 
-      return naviGoBack(this.props.navigator);
+      return naviGoBack();
     }
 
     onClose = ()=> {
@@ -88,31 +88,26 @@ class Courses extends Component {
     }
 
     learningLesson = (lessonId)=>{
-        const {dispatch,navigator} = this.props;
+        const {dispatch} = this.props;
         const {token,grade} = this.state.userData;
 
         dispatch({
             type:'courses/learning',
             token,
             grade,
-            lessonId,
-            navigator
+            lessonId
         });  
     }
 
     onActionSelected = ()=>{
-        this.props.navigator.push({
-          component: OtherQrcode,
-          name: 'OtherQrcode'
-        });
+        Actions.otherQrcode()
     }
 
     render() {
-        const {courses,dispatch,navigator} = this.props;
+        const {courses,dispatch} = this.props;
         return (
             <View>
                <Toolbar
-                    navigator = {navigator}
                     onIconClicked={this.onIconClicked}
                     title = "安全"
                     leftIcon = {categoryPress}
@@ -157,7 +152,7 @@ class Courses extends Component {
 
 const CoursesStyles = StyleSheet.create({
     spinner: {
-        flex: 1,
+        flexGrow: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
