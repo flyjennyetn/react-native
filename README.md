@@ -779,15 +779,6 @@ function* coursesQuery({
 [wechat-react](https://github.com/flyjennyetn/wechat)
 
 
-##贡献者
-
-[北京天融互联科技有限公司](http://www.e-tianrong.com/)
-
-[flyjennyetn](https://github.com/flyjennyetn)
-
-[荣倩倩](rongqianqian@e-tianrong.com)
-
-
 
 ##开源协议
 
